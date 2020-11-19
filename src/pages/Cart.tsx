@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 import { useQuery, gql } from "@apollo/client";
-import { exists } from "fs";
 
 const CURRENCY = gql`
   {
@@ -311,7 +310,9 @@ const Cart = ({
           defaultValue={currency}
           onChange={handleChange}
         >
-          {data &&
+          {!loading &&
+            !error &&
+            data &&
             data.currency.map((item) => (
               <option value={item} key={item}>
                 {item}
